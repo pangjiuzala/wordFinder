@@ -16,13 +16,13 @@ import java.util.regex.Pattern;
 
 /**
  * @author Xingliu
- * @category ÌáÈ¡ÏûÏ¢¼ÇÂ¼µ½text.txt
+ * @category æå–æ¶ˆæ¯è®°å½•åˆ°text.txt
  */
 public class MessageTrim {
 
-	// ÅĞ¶Á×Ö·û´®ÊÇ·ñÆğÊ¼ÓÚprefix
+	// åˆ¤è¯»å­—ç¬¦ä¸²æ˜¯å¦èµ·å§‹äºprefix
 	private static final String fullPath = "message.dat";
-	private static final String baseFile = "È«²¿ÏûÏ¢¼ÇÂ¼1.txt";
+	private static final String baseFile = "å…¨éƒ¨æ¶ˆæ¯è®°å½•.txt";
 
 	private boolean IsStartWith(String text, String prefix) {
 
@@ -30,7 +30,7 @@ public class MessageTrim {
 
 	}
 
-	// Çå³ıÖØ¸´ÎÄ¼ş
+	// æ¸…é™¤é‡å¤æ–‡ä»¶
 	public static void fileClear(String path) {
 		File files = new File(path);
 		// if file doesnt exists, then create it
@@ -39,9 +39,9 @@ public class MessageTrim {
 		}
 	}
 
-	// ÅĞ¶Ï×Ö·û´®ÊÇ·ñÊÇÊ±¼ä¸ñÊ½
-	// \\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2} ÊÇÅĞ¶Ïyyyy-MM-dd hh:mm:ss¸ñÊ½
-	// \\d{4}-\\d{1,2}-\\d{1,2} ÊÇÅĞ¶Ïyyyy-MM-dd¸ñÊ½
+	// åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦æ˜¯æ—¶é—´æ ¼å¼
+	// \\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2} æ˜¯åˆ¤æ–­yyyy-MM-dd hh:mm:ssæ ¼å¼
+	// \\d{4}-\\d{1,2}-\\d{1,2} æ˜¯åˆ¤æ–­yyyy-MM-ddæ ¼å¼
 	private boolean IsTime(String text) {
 
 		if (text.matches("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{2}:\\d{2}:\\d{2}")
@@ -53,7 +53,7 @@ public class MessageTrim {
 
 	}
 
-	// ÅĞ¶Á×Ö·û´®ÊÇ·ñ°üº¬Ê±¼ä¸ñÊ½
+	// åˆ¤è¯»å­—ç¬¦ä¸²æ˜¯å¦åŒ…å«æ—¶é—´æ ¼å¼
 	private boolean IsStartWithTime(String text) {
 		if (text.length() >= 20 && IsTime(text.substring(0, 10)))
 			return true;
@@ -62,19 +62,19 @@ public class MessageTrim {
 
 	public void GBKtoUtf8(String file) throws Exception {
 		BufferedReader bre = null;
-		BufferedWriter bw = null;// ¶¨ÒåÒ»¸öÁ÷
+		BufferedWriter bw = null;// å®šä¹‰ä¸€ä¸ªæµ
 
-		bre = new BufferedReader(new FileReader(file));// ´ËÊ±»ñÈ¡µ½µÄbre¾ÍÊÇÕû¸öÎÄ¼şµÄ»º´æÁ÷
+		bre = new BufferedReader(new FileReader(file));// æ­¤æ—¶è·å–åˆ°çš„breå°±æ˜¯æ•´ä¸ªæ–‡ä»¶çš„ç¼“å­˜æµ
 		bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-				"text.dat"), Charset.forName("UTF-8")));// È·ÈÏÁ÷µÄÊä³öÎÄ¼şºÍ±àÂë¸ñÊ½£¬´Ë¹ı³Ì´´½¨ÁË¡°test.txt¡±ÊµÀı
+				"text.dat"), Charset.forName("UTF-8")));// ç¡®è®¤æµçš„è¾“å‡ºæ–‡ä»¶å’Œç¼–ç æ ¼å¼ï¼Œæ­¤è¿‡ç¨‹åˆ›å»ºäº†â€œtest.txtâ€å®ä¾‹
 		String str;
-		while ((str = bre.readLine()) != null) // ÅĞ¶Ï×îºóÒ»ĞĞ²»´æÔÚ£¬Îª¿Õ½áÊøÑ­»·
+		while ((str = bre.readLine()) != null) // åˆ¤æ–­æœ€åä¸€è¡Œä¸å­˜åœ¨ï¼Œä¸ºç©ºç»“æŸå¾ªç¯
 		{
 			bw.write(str + "\r\n");
 		}
 		;
-		bw.close();// ¹Ø±ÕÁ÷
-		bre.close();// ¹Ø±ÕÁ÷
+		bw.close();// å…³é—­æµ
+		bre.close();// å…³é—­æµ
 	}
 
 	private void write(String text, String path) throws IOException {
@@ -93,25 +93,25 @@ public class MessageTrim {
 	}
 
 	public void judgeNouse(String lines) throws IOException {
-		String line = lines.replaceAll("¡¾", "[").replaceAll("¡¿", "]")
+		String line = lines.replaceAll("ã€", "[").replaceAll("ã€‘", "]")
 				.replaceAll(" ", "");
-		String msg1 = "ÎÒÃÇÒÑ¾­ÊÇºÃÓÑÁË";
-		String msg2 = "ÄúÈ¡ÏûÁË";
-		String msg3 = "ÄúºÃ£¬ÎÒÏÖÔÚÓĞÊÂ²»ÔÚ";
-		String msg4 = "Äú·¢ËÍÁË";
-		String msg5 = "¶Ô·½ÒÑ³É¹¦½ÓÊÕÁËÄú·¢ËÍµÄÀëÏßÎÄ¼ş";
-		String msg6 = "¶Ô·½È¡Ïû";
-		String msg7 = "[QQºì°ü]ÎÒ·¢ÁËÒ»¸ö¡°¿ÚÁîºì°ü¡±";
-		String msg8 = "QQÇëÊ¹ÓÃĞÂ°æÊÖ»úQQ²éÊÕºì°ü";
-		String msg9 = "·ÖÏí";
-		String msg10 = "¼ÓÈë±¾Èº";
-		String msg11 = "ÈºÖ÷ÒÑ";
-		// Æ¥Åä[×Ö·û]ÀàĞÍµÄ×Ö·û´®£¬Èç"[±íÇé] [123] [abc]Ö®ÀàµÄ"
+		String msg1 = "æˆ‘ä»¬å·²ç»æ˜¯å¥½å‹äº†";
+		String msg2 = "æ‚¨å–æ¶ˆäº†";
+		String msg3 = "æ‚¨å¥½ï¼Œæˆ‘ç°åœ¨æœ‰äº‹ä¸åœ¨";
+		String msg4 = "æ‚¨å‘é€äº†";
+		String msg5 = "å¯¹æ–¹å·²æˆåŠŸæ¥æ”¶äº†æ‚¨å‘é€çš„ç¦»çº¿æ–‡ä»¶";
+		String msg6 = "å¯¹æ–¹å–æ¶ˆ";
+		String msg7 = "[QQçº¢åŒ…]æˆ‘å‘äº†ä¸€ä¸ªâ€œå£ä»¤çº¢åŒ…â€";
+		String msg8 = "QQè¯·ä½¿ç”¨æ–°ç‰ˆæ‰‹æœºQQæŸ¥æ”¶çº¢åŒ…";
+		String msg9 = "åˆ†äº«";
+		String msg10 = "åŠ å…¥æœ¬ç¾¤";
+		String msg11 = "ç¾¤ä¸»å·²";
+		// åŒ¹é…[å­—ç¬¦]ç±»å‹çš„å­—ç¬¦ä¸²ï¼Œå¦‚"[è¡¨æƒ…] [123] [abc]ä¹‹ç±»çš„"
 		String strRegex = "\\[*[\u4e00-\u9fa5]*\\]|\\[*[0-9a-zA-Z]*\\]|\\[*^\\d+$*\\]|\\[.*?\\]";
 		Pattern pattern = Pattern.compile(strRegex);
 
-		if (!IsStartWith(line, "ÏûÏ¢·Ö×é:") && !IsStartWith(line, "==")
-				&& !IsStartWith(line, "ÏûÏ¢¶ÔÏó:") && !IsStartWith(line, "ÏûÏ¢¼ÇÂ¼")
+		if (!IsStartWith(line, "æ¶ˆæ¯åˆ†ç»„:") && !IsStartWith(line, "==")
+				&& !IsStartWith(line, "æ¶ˆæ¯å¯¹è±¡:") && !IsStartWith(line, "æ¶ˆæ¯è®°å½•")
 				&& !IsStartWith(line, msg1) && !IsStartWith(line, msg2)
 				&& !IsStartWith(line, msg3) && !IsStartWith(line, msg4)
 				&& !IsStartWith(line, msg5) && !IsStartWith(line, msg6)
@@ -120,20 +120,22 @@ public class MessageTrim {
 				&& !IsStartWith(line, msg11) && !IsStartWithTime(line)) {
 			Matcher m = pattern.matcher(line);
 			String result = m.replaceAll("").replaceAll("\r\n", "");
-			System.out.println(result);
-			write(result, fullPath);
-
+			//å»é™¤ç©ºè¡Œ
+			if (!result.isEmpty()) {
+				System.out.println(result);
+				write(result, fullPath);
+			}
 		}
 	}
 
 	// public static void main(String[] args) throws IOException {
 	// new MessageTrim()
-	// .judgeNouse("[sh000001 ÉÏÖ¤Ö¸Êı]111±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][sh000001 ÉÏÖ¤Ö¸Êı][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][ÀºÇò][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã][±ã±ã");
+	// .judgeNouse("[sh000001 ä¸Šè¯æŒ‡æ•°]111ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][sh000001 ä¸Šè¯æŒ‡æ•°][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ç¯®çƒ][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿][ä¾¿ä¾¿");
 	// }
 
 	private void read(String path) throws IOException {
 		fileClear(fullPath);
-		System.out.println("´¦ÀíÖĞ¡­¡­");
+		System.out.println("å¤„ç†ä¸­â€¦â€¦");
 		File file = new File(path);
 		FileInputStream s = new FileInputStream(file);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(s,
@@ -152,7 +154,7 @@ public class MessageTrim {
 		mt.read(baseFile);
 		mt.GBKtoUtf8(fullPath);
 		fileClear(fullPath);
-		System.out.println("ÌáÈ¡ÏûÏ¢ÓïÁÏ³É¹¦£¬½á¹û±£´æÔÚtext.dat");
+		System.out.println("æå–æ¶ˆæ¯è¯­æ–™æˆåŠŸï¼Œç»“æœä¿å­˜åœ¨text.dat");
 
 	}
 }
